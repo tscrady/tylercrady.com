@@ -1,7 +1,7 @@
 <?php
 
-ini_set('display_errors', 1); 
-error_reporting(E_ALL | E_STRICT);
+//ini_set('display_errors', 1); 
+//error_reporting(E_ALL | E_STRICT);
 
 
 include_once 'pdo_class.php';//Include our DB connection
@@ -14,7 +14,9 @@ class portfolio{
 
 
     
-    //Construct just creates a PDO object
+    /*
+     * Construct just creates a PDO object
+     */
     function __construct(){
         
         $pdo = new pdo_connection();
@@ -25,7 +27,11 @@ class portfolio{
     
    
 
-   
+   /*
+    * This is used for the admin panel and for the navigation.
+    * It returns the basic data for all the portfolio entries as well as a preview image.
+    * If this is called with 'true' passed as a parameter, it is coming from the admin panel
+    */
     function get_portfolio_links($admin = false){
 
         $return_array = array();
@@ -63,7 +69,9 @@ class portfolio{
     
     
     
-    
+    /*
+     * This displays the html for the dropdown navigation
+     */
     function display_portfolio_navigation(){
         
         $portfolio_links = $this->get_portfolio_links();
@@ -102,7 +110,9 @@ class portfolio{
     
     
     
-    //this returns the html for all images in a portfolio
+    /*
+     * this returns the html for all images in a portfolio
+     */
     function display_portfolio_slider2($id){
             
             $query = "select count(*) as count from portfolio_images where portfolio_id='$id' and status=1";
@@ -161,7 +171,9 @@ class portfolio{
     
     
     
-    //Check if portfoliio exists
+    /*
+     * Check if portfoliio exists
+     */
     function is_portfolio($id){
         $query = "select count(*) as count from portfolio where id = '$id' and status=1";
         $count = $this->conn->prepare($query);
